@@ -1,12 +1,11 @@
-// Dateiname: berlin_time.js
+// Dateiname: berlin_time.js (im Ordner /api/)
 // Gibt das aktuelle Datum und die Zeit für Berlin als ISO-String zurück
 
 module.exports = (req, res) => {
-    // 1. Hole das aktuelle UTC-Datum und konvertiere es in das gewünschte Format
+    // Hole das aktuelle UTC-Datum
     const now = new Date();
 
-    // 2. Erzeuge einen lokalen String für Berlin
-    // 'de-DE' für Deutschland, mit expliziter Zeitzone.
+    // Erzeuge einen lokalen String für Berlin
     const options = {
         timeZone: 'Europe/Berlin',
         year: 'numeric',
@@ -17,11 +16,10 @@ module.exports = (req, res) => {
         second: '2-digit'
     };
     
-    // Formatiert das Datum als String, der leicht zu parsen ist
+    // Formatiert das Datum in das ISO-Format (z.B. "2025-12-04T19:24:23")
     const dateString = now.toLocaleString('sv-SE', options).replace(/,/, '').replace(/\s/g, 'T');
     
-    // 3. Sende die Antwort als leicht lesbares JSON zurück
-    // Das Ergebnis sieht z.B. so aus: "2025-12-04T19:24:23"
+    // Sende die Antwort als leicht lesbares JSON zurück
     res.status(200).json({
         current_datetime_berlin: dateString
     });
